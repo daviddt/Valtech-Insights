@@ -31,18 +31,26 @@ export class GraphComponent implements OnInit {
     this.loading = true;
 
     const concurrectRequests = selectedTeams.map((team) => {
-      return this.authHttp.get(`https://teamplanner.efocus.nl/services/planning/${team.id}?offset=0&limit=${amountOfWeeks}`).map(res => res.json());
+      return this.authHttp.get(`https://teamplanner.efocus.nl/services/planning/${team.id}?offset=0&limit=${amountOfWeeks}`)
+        .map(res => res.json());
     });
     
     Observable.forkJoin(concurrectRequests)
       .subscribe(
         response => {
-          const readAbleObject = convertDataToReadableObject(response, selectedExpertise, amountOfWeeks);
-          const chartAbleObject = convertDataToChartAbleObject(readAbleObject);
+          const chartData = convertDataToChartAbleObject(
+            convertDataToReadableObject(
+              response, 
+              selectedExpertise, 
+              amountOfWeeks
+            )
+          );
+
+          const labels = generateLabels(amountOfWeeks);
 
           this.chartInformation = {
-            chartData: chartAbleObject,
-            labels: generateLabels(amountOfWeeks)
+            chartData,
+            labels
           }
 
           this.loading = false;
