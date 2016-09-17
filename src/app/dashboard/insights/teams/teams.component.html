@@ -1,0 +1,15 @@
+<div class="teams-menu">
+  <h2 class="title">
+    Teams
+  </h2>
+
+  <button class="button" (click)="selectAllTeams()">Select All</button>
+  <button class="button" (click)="deSelectAllTeams()">Deselect All</button>
+
+  <ul *ngIf="insightsService.teams.length">
+    <li *ngFor="let team of insightsService.teams | sort: 'name'" (click)="toggleSelected(team)" [class.selected]="team.selected" class="team">
+      <input type="checkbox">
+      <label for="">{{team.name}}</label>
+    </li>
+  </ul>
+</div>

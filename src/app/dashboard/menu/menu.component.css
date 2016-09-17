@@ -1,0 +1,38 @@
+.menu {
+  background: #1a1a1a;
+}
+
+.top-row {
+  height: 50px;
+  padding: 5px;
+}
+
+.logo {
+  max-height: 100%;
+}
+
+.navigation {
+  background: #00bdfa;
+  color: #fff;
+}
+
+li {
+  list-style: none;
+}
+
+li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  margin-right: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+li a.active,
+li a:hover {
+  text-decoration: underline;
+}
+
+nav {
+  padding: 5px 15px;
+}
