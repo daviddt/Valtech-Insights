@@ -39,6 +39,7 @@ aside {
 
 main {
   padding: 30px;
+  margin-top: 78px;
 }
 
 .button {
@@ -78,6 +79,26 @@ main {
 	border-bottom: 1px solid;
   margin-bottom: 19px;
 }
+
+.styled-select {
+   background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
+   overflow: hidden;
+   width: 100%;
+   border: 1px solid rgba(26,26,26,.8);
+   margin-bottom: 15px;
+}
+
+.styled-select select {
+   background: transparent;
+   border: none;
+   font-size: 14px;
+   height: 29px;
+   padding: 5px;
+   width: 100%;
+   -webkit-appearance: none;
+   appearance: none;
+}
+
 /*
 main {
   width: 100%;

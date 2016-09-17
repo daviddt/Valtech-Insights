@@ -5,6 +5,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { InsightsComponent }   from './insights.component';
 import { TeamsComponent } from './teams/teams.component';
 import { ExpertisesComponent } from './expertises/expertises.component';
+import { WeeksComponent } from './weeks/weeks.component';
 import { GraphComponent } from './graph/graph.component';
 import { LineChartComponent } from './graph/linechart/linechart.component';
 
@@ -24,7 +25,8 @@ import { SortPipe } from './../../common/pipes/sort';
     TeamsComponent,
     ExpertisesComponent,
     GraphComponent,
-    LineChartComponent
+    LineChartComponent,
+    WeeksComponent
   ],
   providers: [
     InsightsService

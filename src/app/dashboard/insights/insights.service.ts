@@ -5,11 +5,19 @@ import { Team } from './team/team';
 @Injectable()
 export class InsightsService {
   teams: Array<Team> = [];
+  amountOfWeeks: number;
   selectedExpertiseId: number;
 
-  updateSelectedExpertise(expertiseId: number) {
+  updateSelectedExpertise(expertiseId: number): void {
     this.selectedExpertiseId = expertiseId;
-    console.log(this);
+  }
+
+  updateAmountOfWeeks(amountOfWeeks: number):void  {
+    this.amountOfWeeks = amountOfWeeks;
+  }
+
+  getAmountOfWeeks(): number {
+    return this.amountOfWeeks;
   }
 
   getSelectedExpertise(): number {

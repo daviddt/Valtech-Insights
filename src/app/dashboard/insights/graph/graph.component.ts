@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { AuthHttp } from 'angular2-jwt';
+import * as moment from 'moment';
 
 import { InsightsService } from './../insights.service';
 
@@ -12,26 +13,38 @@ import { InsightsService } from './../insights.service';
   ]
 })
 export class GraphComponent implements OnInit {
-  chartData: Array<any>;
+  chartInformation: Object = {};
+
   loading: boolean = false;
   
   constructor(private authHttp: AuthHttp, private insightsService: InsightsService) { }
 
   generateGraph() {
-    this.loading = true;
     const selectedTeams = this.insightsService.getSelectedTeams();
     const selectedExpertise = this.insightsService.getSelectedExpertise();
+    const amountOfWeeks = this.insightsService.getAmountOfWeeks();
+
+    if (!selectedTeams.length || !selectedExpertise) {
+      return;
+    }
+
+    this.loading = true;
 
     const concurrectRequests = selectedTeams.map((team) => {
-      return this.authHttp.get(`https://teamplanner.efocus.nl/services/planning/${team.id}?offset=0&limit=12`).map(res => res.json());
+      return this.authHttp.get(`https://teamplanner.efocus.nl/services/planning/${team.id}?offset=0&limit=${amountOfWeeks}`).map(res => res.json());
     });
     
     Observable.forkJoin(concurrectRequests)
       .subscribe(
         response => {
-          const readAbleObject = convertDataToReadableObject(response, this.insightsService.selectedExpertiseId);
+          const readAbleObject = convertDataToReadableObject(response, selectedExpertise, amountOfWeeks);
           const chartAbleObject = convertDataToChartAbleObject(readAbleObject);
-          this.chartData = chartAbleObject;
+
+          this.chartInformation = {
+            chartData: chartAbleObject,
+            labels: generateLabels(amountOfWeeks)
+          }
+
           this.loading = false;
         },
         error => {
@@ -44,6 +57,16 @@ export class GraphComponent implements OnInit {
   ngOnInit() { }
 }
 
+
+function generateLabels(amountOfWeeks: number) {
+  const labels: Array<string> = [];
+  console.log(amountOfWeeks);
+  for (let i = 0; i < amountOfWeeks; i++) {
+    labels.push(`Week ${moment().add(i, 'weeks').isoWeek()}`);
+  };
+  console.log('test', labels);
+  return labels;
+}
 
 
 function convertDataToChartAbleObject (data: Array<any>) {
@@ -60,12 +83,12 @@ function convertDataToChartAbleObject (data: Array<any>) {
 
 
 
-function convertDataToReadableObject(planning: Array<any>, selectedExpertise: number) {
+function convertDataToReadableObject(planning: Array<any>, selectedExpertise: number, amountOfWeeks: number) {
 
   const readAbleObject: Array<Object> = [];
 
 
-  for (let i = 0; i < 12; i++) {
+  for (let i = 0; i < amountOfWeeks; i++) {
 
     const calculatedTimeForWeek = {
       available: 0,

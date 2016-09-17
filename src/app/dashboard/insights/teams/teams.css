@@ -1,5 +1,12 @@
 li {
   position: relative;
+  /*border-bottom: 1px solid #eaeaea;*/
+  transition: .2s all;
+  cursor: pointer;
+}
+
+li:hover {
+  background: #f9f9f9;
 }
 
 label {
