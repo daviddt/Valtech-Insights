@@ -68,11 +68,11 @@ export class GraphComponent implements OnInit {
 
 function generateLabels(amountOfWeeks: number) {
   const labels: Array<string> = [];
-  console.log(amountOfWeeks);
+
   for (let i = 0; i < amountOfWeeks; i++) {
     labels.push(`Week ${moment().add(i, 'weeks').isoWeek()}`);
   };
-  console.log('test', labels);
+
   return labels;
 }
 

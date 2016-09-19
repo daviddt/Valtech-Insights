@@ -1,0 +1,7 @@
+<h2 class="title">Expertise</h2>
+
+<div class="styled-select">
+  <select (change)="updateSelectedExpertise(selected.value)" #selected>
+    <option *ngFor="let expertise of expertises" [value]="expertise.id">{{expertise.name}}</option>
+  </select>
+</div>

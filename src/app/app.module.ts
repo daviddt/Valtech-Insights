@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { BrowserModule  } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 
@@ -16,6 +17,7 @@ import { AuthService } from './common/auth/auth.service';
 @NgModule({
   imports: [
     BrowserModule,
+    RouterModule,
     HttpModule,
 
     DashboardModule,
@@ -25,6 +27,8 @@ import { AuthService } from './common/auth/auth.service';
   ],
   declarations: [
     AppComponent,
+  ],
+  exports: [
   ],
   providers: [
     appRoutingProviders,

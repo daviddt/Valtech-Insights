@@ -1,0 +1,15 @@
+<h2 class="title">Week start</h2>
+
+<div class="styled-select">
+  <select (change)="updateWeekStart(start.value)" #start>
+    <option *ngFor="let week of weeks" [value]="week.value">{{week.label}}</option>
+  </select>
+</div>
+
+<h2 class="title">Week end</h2>
+
+<div class="styled-select">
+  <select (change)="updateWeekEnd(end.value)" #end>
+    <option *ngFor="let week of weeks" [value]="week.value">{{week.label}}</option>
+  </select>
+</div>

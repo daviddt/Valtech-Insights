@@ -1,0 +1,7 @@
+<h2 class="title">Amount of weeks</h2>
+
+<div class="styled-select">
+  <select (change)="updateAmountOfWeeks(selected.value)" #selected>
+    <option *ngFor="let week of weeks" [value]="week">{{week}}</option>
+  </select>
+</div>

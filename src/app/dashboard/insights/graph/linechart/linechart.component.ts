@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 
 @Component({
   selector: 'linechart',
-  templateUrl: 'linechart.component.html'
+  templateUrl: 'linechart.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LineChartComponent {
   @Input() chartData: Array<any> = [];

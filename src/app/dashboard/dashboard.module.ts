@@ -6,6 +6,8 @@ import { DashboardComponent } from './dashboard.component';
 import { MenuComponent } from './menu/menu.component';
 
 import { InsightsModule } from './insights/insights.module';
+import { OverPlannedModule } from './overplanned/overplanned.module';
+import { ExpertiseFinderModule } from './expertisefinder/expertisefinder.module';
 
 import { routing, appRoutingProviders }  from './dashboard.routing';
 
@@ -14,9 +16,13 @@ import { routing, appRoutingProviders }  from './dashboard.routing';
     BrowserModule,
     RouterModule,
     InsightsModule,
+    OverPlannedModule,
+    ExpertiseFinderModule,
+
     routing
   ],
-  exports: [],
+  exports: [
+  ],
   declarations: [
     DashboardComponent,
     MenuComponent
