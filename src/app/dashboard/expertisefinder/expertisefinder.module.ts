@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { ExpertiseFinderComponent }   from './expertisefinder.component';
-// import { TeamsComponent } from './teams/teams.component';
+import { AvailabilityComponent } from './availability/availability.component';
 import { ExpertisesComponent } from './expertises/expertises.component';
 import { WeeksComponent } from './weeks/weeks.component';
-// import { GraphComponent } from './graph/graph.component';
+import { FinderComponent } from './finder/finder.component';
 // import { LineChartComponent } from './graph/linechart/linechart.component';
 
 import { ExpertiseFinderService } from './expertisefinder.service';
@@ -21,7 +21,9 @@ import { ExpertiseFinderService } from './expertisefinder.service';
   exports: [],
   declarations: [
     ExpertiseFinderComponent,
+    FinderComponent,
     WeeksComponent,
+    AvailabilityComponent,
     // SortPipe,
     // InsightsComponent,
     // TeamsComponent,

@@ -18,7 +18,7 @@ export class WeeksComponent implements OnInit {
   }
 
   updateWeekEnd(week: String) {
-    this.expertiseFinderService.updateWeekStart(Number(week));
+    this.expertiseFinderService.updateWeekEnd(Number(week));
   }
 
   ngOnInit() {}

@@ -1,0 +1,7 @@
+<h2 class="title">Required availability in days</h2>
+
+<div class="styled-select">
+  <select (change)="updateAvailability(availabilitySelect.value)" #availabilitySelect>
+    <option *ngFor="let available of availability" [value]="available">{{available}}</option>
+  </select>
+</div>
