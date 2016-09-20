@@ -11,6 +11,7 @@ import { ExpertiseFinderService } from './../expertisefinder.service';
 })
 export class FinderComponent implements OnInit {
   loading: boolean = false;
+  teams: Array<any> = [];
   
   constructor(private authHttp: AuthHttp, private expertiseFinderService: ExpertiseFinderService) { }
 
@@ -19,8 +20,10 @@ export class FinderComponent implements OnInit {
     const concurrectRequests: any[] = [];
     const weekStart = this.expertiseFinderService.getWeekStart();
     const weekEnd = this.expertiseFinderService.getWeekEnd();
+    const selectedExpertise = this.expertiseFinderService.getSelectedExpertise();
+    const requiredAvailability = this.expertiseFinderService.getAvailability();
 
-    console.log(weekStart, weekEnd)
+    this.loading = true;
 
     this.authHttp.get('https://teamplanner.efocus.nl/services/teams')
     .subscribe(
@@ -36,7 +39,19 @@ export class FinderComponent implements OnInit {
           Observable.forkJoin(concurrectRequests)
             .subscribe(
               response => {
-                console.log(response);
+                this.loading = false;
+                const teamsWithAvailability = getTeamsWithAvailability(response, selectedExpertise, requiredAvailability);
+                const teamWithRequiredAvailability = teamsWithAvailability.filter((team: any) => {
+                  let meetsRequirement = true;
+
+                  team.planningPerWeek.forEach((weeklyPlanning: number) => {
+                    if (weeklyPlanning < team.requiredAvailability) meetsRequirement = false;
+                  })
+
+                  return meetsRequirement;
+                });
+
+                this.teams = teamWithRequiredAvailability;
               },
               error => {
                 console.log(error);
@@ -86,6 +101,51 @@ export class FinderComponent implements OnInit {
   }
 
   ngOnInit() { }
+}
+
+function getTeamsWithAvailability(teams: Array<Object>, expertiseId: number, availability: number) {
+  const returnObj: any[] = [];
+
+  teams.forEach((team: any) => {
+
+    const planningPerWeek: Array<any> = [];
+    const teamObj = { teamId: team.teams[0].teamId, requiredExpertise: expertiseId, requiredAvailability: availability, planningPerWeek };
+
+    const meetRequirements = true;
+    const currentTeam: any = team.teams[0];
+
+    for (let i = 0; i < currentTeam.weeks.length; i++) {
+
+      const weekObj: any = {};
+
+      let totalExpertiseAvailability = 0;
+      let totalHoursPlanendForExpertise = 0;
+
+      let selectedExpertisesInTeam = currentTeam.weeks[i].availability.filter((expertise: any) => {
+        return expertise.expertiseId === expertiseId
+      });
+
+      currentTeam.weeks[i].projects.forEach((project: any) => {
+        project.planning.forEach((planning: any) => {
+          if (planning.expertiseId === expertiseId) totalHoursPlanendForExpertise += planning.planning;
+        });
+      });
+
+      if (selectedExpertisesInTeam.length) {
+        selectedExpertisesInTeam.forEach((expertise: any) => {
+          totalExpertiseAvailability += expertise.availability;
+        })
+      };
+
+      teamObj.planningPerWeek.push(totalExpertiseAvailability - totalHoursPlanendForExpertise);
+
+    }
+
+    returnObj.push(teamObj);
+
+  });
+
+  return returnObj;
 }
 
 

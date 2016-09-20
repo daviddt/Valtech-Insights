@@ -7,7 +7,8 @@ import { AvailabilityComponent } from './availability/availability.component';
 import { ExpertisesComponent } from './expertises/expertises.component';
 import { WeeksComponent } from './weeks/weeks.component';
 import { FinderComponent } from './finder/finder.component';
-// import { LineChartComponent } from './graph/linechart/linechart.component';
+import { ListComponent } from './finder/list/list.component';
+import { TeamViewComponent } from './finder/list/team/team.component';
 
 import { ExpertiseFinderService } from './expertisefinder.service';
 
@@ -24,7 +25,8 @@ import { ExpertiseFinderService } from './expertisefinder.service';
     FinderComponent,
     WeeksComponent,
     AvailabilityComponent,
-    // SortPipe,
+    ListComponent,
+    TeamViewComponent,
     // InsightsComponent,
     // TeamsComponent,
     ExpertisesComponent,

@@ -5,7 +5,7 @@ import { Team } from './team/team';
 @Injectable()
 export class InsightsService {
   teams: Array<Team> = [];
-  amountOfWeeks: number;
+  amountOfWeeks: number = 1;
   selectedExpertiseId: number;
 
   updateSelectedExpertise(expertiseId: number): void {

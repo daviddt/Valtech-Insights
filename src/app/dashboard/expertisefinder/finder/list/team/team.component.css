@@ -1,0 +1,22 @@
+.team-wrapper {
+  margin: 50px 0 0 0;
+}
+
+.subtitle {
+  margin-bottom: 15px;
+  font-weight: normal;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+li {
+  list-style: initial;
+}
+
+base-chart {
+  max-width: 900px;
+}
+
+

@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class ExpertiseFinderService {
-  weekStart: number;
-  weekEnd: number;
-  availability: number;
+  weekStart: number = 0;
+  weekEnd: number = 1;
+  availability: number = 0.5;
   selectedExpertiseId: number;
 
   updateSelectedExpertise(expertiseId: number): void {
@@ -12,7 +12,6 @@ export class ExpertiseFinderService {
   }
 
   updateWeekStart(start: number):void  {
-    console.log(start);
     this.weekStart = start;
   }
 

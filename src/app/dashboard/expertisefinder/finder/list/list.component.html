@@ -1,0 +1,7 @@
+<h2 class="title" *ngIf="!teams.length">No teams could be found matching your criteria</h2>
+
+<ul *ngIf="teams.length">
+  <li *ngFor="let team of teams">
+    <teamview [team]="team"></teamview>
+  </li>
+</ul>

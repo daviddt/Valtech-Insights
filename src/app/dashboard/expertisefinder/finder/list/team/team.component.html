@@ -1,0 +1,21 @@
+<div class="team-wrapper">
+  <h2 class="title" *ngIf="selectedTeam">{{selectedTeam.name}}</h2>
+
+  <h3 class="subtitle">
+    People in this team with the selected expertise
+  </h3>
+
+  <ul>
+    <li *ngFor="let member of matchingPeopleFromTeam">
+      {{member.person.name}}
+    </li>
+  </ul>
+
+  <base-chart
+    class="chart"
+    [datasets]="chartData"
+    [labels]="labels"
+    [options]="options"
+    [chartType]="'line'">
+  </base-chart>
+</div>
